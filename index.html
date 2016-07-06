@@ -17,12 +17,12 @@
 </head>
 <body>
   <button onclick="drawRandom()">Draw Random</button>
-  <div>a<input id="a" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
-  <div>b<input id="b" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
-  <div>c<input id="c" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
-  <div>d<input id="d" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
-  <div>e<input id="e" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
-  <div>f<input id="f" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>a<input id="a" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
+  <div>b<input id="b" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
+  <div>c<input id="c" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
+  <div>d<input id="d" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
+  <div>e<input id="e" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
+  <div>f<input id="f" type="range" min="0" max="3.2" step="0.001" oninput="draw()"></div>
 
 
 <script>
@@ -111,12 +111,12 @@ function randomVals() {
 }
 
 function drawRandom() {
-  a.value = Math.random()*4;
-  b.value = Math.random()*4;
-  c.value = Math.random()*4;
-  d.value = Math.random()*4;
-  e.value = Math.random()*4;
-  f.value = Math.random()*4;
+  a.value = Math.random()*3;
+  b.value = Math.random()*3;
+  c.value = Math.random()*3;
+  d.value = Math.random()*3;
+  e.value = Math.random()*3;
+  f.value = Math.random()*3;
   draw();
 }
 
