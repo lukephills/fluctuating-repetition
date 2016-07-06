@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Fluctuating Repetition</title>
+</head>
+<body>
+  <button onclick="drawRandom()">Draw Random</button>
+  <div>a<input id="a" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>b<input id="b" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>c<input id="c" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>d<input id="d" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>e<input id="e" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+  <div>f<input id="f" type="range" min="0" max="5" step="0.001" oninput="draw()"></div>
+
+
+<script>
+
+let a = document.getElementById('a');
+let b = document.getElementById('b');
+let c = document.getElementById('c');
+let d = document.getElementById('d');
+let e = document.getElementById('e');
+let f = document.getElementById('f');
+
+function getPixelRatio() {
+  return window.devicePixelRatio;
+}
+
+function canvasResize(canvas, width, height){
+  const ratio = getPixelRatio();
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+  canvas.getContext('2d').setTransform(ratio, 0, 0, ratio, 0, 0);
+  return canvas;
+}
+
+function createCanvas(width, height) {
+  const canvas = document.createElement('canvas');
+  return canvasResize(canvas, width, height);
+}
+
+const width = 500;
+const height = 500;
+const canvas = createCanvas(width, height);
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+
+function draw() {
+  ctx.clearRect(0,0,width, height);
+  let vals = getVals();
+  let xs = 0;
+  let ys = 0;
+  let zs = 0;
+  
+  for(var i = 1000; i >= 0; i--) {
+    const res = drawPoint(xs, ys, zs, vals);
+    xs = res[0];
+    ys = res[1];
+    zs = res[2];
+  }
+}
+
+function drawPoint(xs, ys, zs, vals) {
+  
+  let new_x = Math.sin(vals[0]*xs) + 
+              Math.sin(vals[1]*ys) - 
+              Math.cos(vals[2]*zs);
+
+  let new_y = Math.sin(vals[3]*xs) + 
+              Math.sin(vals[4]*ys) - 
+              Math.cos(vals[5]*zs);
+
+  xs = new_x;
+  ys = new_y;
+  zs = zs + 0.1;
+  
+  ctx.fillRect(xs*width/8 + width/2, ys*height/8 + height/2, 1, 1);
+  
+  return [xs, ys, zs];
+}
+
+function getVals() {
+  const arr = [a.value, b.value, c.value, d.value, e.value, f.value];
+  return arr;
+}
+
+function randomVals() {
+  let arr = [];
+  for (let i = 0; i < 6; i++) {
+    arr.push(Math.random()*4);
+  }
+  return arr;
+}
+
+function drawRandom() {
+  a.value = Math.random()*4;
+  b.value = Math.random()*4;
+  c.value = Math.random()*4;
+  d.value = Math.random()*4;
+  e.value = Math.random()*4;
+  f.value = Math.random()*4;
+  draw();
+}
+
+draw();
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
